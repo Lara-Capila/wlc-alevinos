@@ -1,4 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+const plugin = require('tailwindcss/plugin');
+import collorPallet from './src/utils/collor-pallet.json';
+
 module.exports = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -12,7 +15,24 @@ module.exports = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      colors: collorPallet.colors
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ addVariant, e, postcss }) {
+      addVariant('firefox', ({ container, separator }) => {
+      const isFirefoxRule = postcss.atRule({
+        name: '-moz-document',
+        params: 'url-prefix()',
+      });
+      isFirefoxRule.append(container.nodes);
+      container.append(isFirefoxRule);
+      isFirefoxRule.walkRules((rule) => {
+        rule.selector = `.${e(
+        `firefox${separator}${rule.selector.slice(1)}`
+        )}`;
+      });
+      });
+    }),
+  ],
 }

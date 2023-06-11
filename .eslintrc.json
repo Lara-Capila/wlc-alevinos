@@ -8,6 +8,10 @@
 		"project": "./tsconfig.json"
 	},
 	"rules": {
+		"react/function-component-definition": ["warn", {
+			"namedComponents": "arrow-function",
+			"unnamedComponents": "arrow-function"
+		}],
 		"linebreak-style": 0,
 		"react/jsx-props-no-spreading": "off",
 		"no-console": ["warn", { "allow": ["warn", "error"] }],

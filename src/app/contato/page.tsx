@@ -1,6 +1,6 @@
 'use client';
 
-import Headdings from '../components/Typography/Headings';
+import Headdings from '../../components/Typography/Headings';
 
 function Contact() {
   return (
